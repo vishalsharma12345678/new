@@ -204,7 +204,8 @@ export function UpdateBooking({ user1 }) {
                   value={data.check_in}
                   required
                   onChange={(e) => {
-                    // handlerCheckIn(e), updateData(e);
+                    handlerCheckIn(e);
+                    updateData(e);
                   }}
                 />
               </p>
@@ -217,7 +218,8 @@ export function UpdateBooking({ user1 }) {
                   value={data.check_out}
                   required
                   onChange={(e) => {
-                    // setcheck_out(e.target.value), updateData(e);
+                    setcheck_out(e.target.value);
+                    updateData(e);
                   }}
                 />
               </p>
@@ -228,7 +230,8 @@ export function UpdateBooking({ user1 }) {
                   name="room_type"
                   required
                   onChange={(e) => {
-                    // handlerCheckOut(), updateData(e);
+                    handlerCheckOut();
+                    updateData(e);
                   }}
                 >
                   <option value="">choose...</option>
@@ -436,9 +439,9 @@ export function UpdateBooking({ user1 }) {
                     onChange={(e) => {
                       setDisabled(true);
                       updateData(e);
-                      // data.bill_to !== "company" || !disabled
-                      //   ? setData((s) => ({ ...s, ["company_name"]: "" }))
-                      //   : "";
+                      if (data.bill_to !== "company" || !disabled) {
+                        setData((s) => ({ ...s, ["company_name"]: "" }));
+                      }
                     }}
                   />
                   <label htmlFor="customer">Customer</label>
@@ -584,8 +587,8 @@ export function UpdateBooking({ user1 }) {
                 </div>
               </p>
               <p>
-                {/* <!-- <label htmlFor="">Upload Id</label>
-              <input type="file" name=""  style="border: 1px solid black" /> --> */}
+                <label htmlFor="">Upload Id</label>
+                <input type="file" name="" style="border: 1px solid black" />
               </p>
               <p>
                 <button onClick={(e) => handleraddGuest(e)}>

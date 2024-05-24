@@ -215,7 +215,8 @@ export function NewBooking({ user1 }) {
                   name="check_in"
                   required
                   onChange={(e) => {
-                    // handlerCheckIn(e), updateData(e);
+                    handlerCheckIn(e);
+                    updateData(e);
                   }}
                 />
               </p>
@@ -227,7 +228,8 @@ export function NewBooking({ user1 }) {
                   name="check_out"
                   required
                   onChange={(e) => {
-                    // setcheck_out(e.target.value), updateData(e);
+                    setcheck_out(e.target.value);
+                    updateData(e);
                   }}
                 />
               </p>
@@ -238,7 +240,8 @@ export function NewBooking({ user1 }) {
                   name="room_type"
                   required
                   onChange={(e) => {
-                    // handlerCheckOut(e, e.target.value), updateData(e);
+                    handlerCheckOut(e, e.target.value);
+                    updateData(e);
                   }}
                 >
                   <option value="" selected>

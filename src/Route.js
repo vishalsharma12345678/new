@@ -15,8 +15,9 @@ import { OngoingFragemnt } from "./Component/Fragment/OngoingFragemnt";
 import { UpcomingFragment } from "./Component/Fragment/UpcomingFragment";
 import { RoomType } from "./Component/RoomType";
 import { Guest } from "./Component/Guest";
-// import { Test } from "./Component/Fragment/Test";
+import { Test } from "./Component/Fragment/Test";
 import { OnHold } from "./Component/OnHold";
+import { PrimeReactProvider } from "primereact/api";
 export function Locations({ user }) {
   return (
     <BrowserRouter>
@@ -48,6 +49,15 @@ export function Locations({ user }) {
                 <RoomType user={user} />
               </ProtectedRoute2>
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/test"
+          exact
+          element={
+            <PrimeReactProvider>
+              <Test user={user} />
+            </PrimeReactProvider>
           }
         />
         <Route
@@ -156,15 +166,7 @@ export function Locations({ user }) {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/test"
-          exact
-          element={
-            <ProtectedRoute>
-              <Test user={user} />
-            </ProtectedRoute>
-          }
-        /> */}
+
         <Route
           path="/userdata"
           exact

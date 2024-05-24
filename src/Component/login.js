@@ -14,14 +14,19 @@ export function Login() {
       username: username,
       password: password,
     };
-    const curUser = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin",
-      user
-    );
-    console.log(curUser.data);
-
-    localStorage.setItem("user", JSON.stringify(curUser.data));
-    window.location.href = "/";
+    // "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin",
+    try {
+      await axios
+        .post("http://localhost:4000/login/getlogin/", user)
+        .then(async (response) => {
+          console.log(await response.data.message);
+          localStorage.setItem("user", JSON.stringify(await response.data));
+          window.location.href = "/";
+        });
+    } catch (error) {
+      // window.location.href = "/login";
+      alert(error.response.data);
+    }
   }
   return (
     <div className="main">
