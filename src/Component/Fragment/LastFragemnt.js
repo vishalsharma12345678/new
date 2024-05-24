@@ -269,12 +269,22 @@ export function LastFragment({ user }) {
             <Column
               field="check_in"
               header="Checked In"
-              style={{ width: "10%" }}
+              style={{ width: "12%" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.check_in}`).toDateString()}</div>
+                );
+              }}
             ></Column>
             <Column
               field="check_out"
               header="Expected Checkout"
-              style={{ width: "10%" }}
+              style={{ width: "12%" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.check_out}`).toDateString()}</div>
+                );
+              }}
             ></Column>
             <Column
               field="verifiedby"
@@ -297,7 +307,16 @@ export function LastFragment({ user }) {
               header="Booking Status"
               body={Booking_status}
             ></Column>
-            <Column field="createdAt" header="Created At"></Column>
+            <Column
+              field="createdAt"
+              header="Created At"
+              style={{ width: "12%" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.createdAt}`).toDateString()}</div>
+                );
+              }}
+            ></Column>
             <Column
               field="#"
               header="Action"
@@ -306,7 +325,7 @@ export function LastFragment({ user }) {
             ></Column>
             <Column
               rowEditor={allowEdit}
-              headerStyle={{ width: "10%", minWidth: "8rem" }}
+              headerStyle={{ width: "5%", minWidth: "8rem" }}
               bodyStyle={{ textAlign: "center" }}
             ></Column>
           </DataTable>

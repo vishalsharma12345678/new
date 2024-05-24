@@ -139,6 +139,11 @@ export function Invoice({ user }) {
               onCellEditComplete={onCellEditComplete}
               filterPlaceholder="Search"
               style={{ width: "6rem" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.updatedAt}`).toDateString()}</div>
+                );
+              }}
             ></Column>
             <Column
               field="bookingid.full_name"

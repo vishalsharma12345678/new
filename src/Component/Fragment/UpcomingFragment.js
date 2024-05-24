@@ -275,11 +275,21 @@ export function UpcomingFragment({ user }) {
               field="check_in"
               header="Checked In"
               style={{ width: "10%" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.check_in}`).toDateString()}</div>
+                );
+              }}
             ></Column>
             <Column
               field="check_out"
               header="Expected Checkout"
               style={{ width: "10%" }}
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.checkout}`).toDateString()}</div>
+                );
+              }}
             ></Column>
             <Column
               field="verifiedby"
@@ -302,7 +312,15 @@ export function UpcomingFragment({ user }) {
               header="Booking Status"
               body={Booking_status}
             ></Column>
-            <Column field="createdAt" header="Created At"></Column>
+            <Column
+              field="createdAt"
+              header="Created At"
+              body={(products) => {
+                return (
+                  <div>{new Date(`${products.createdAt}`).toDateString()}</div>
+                );
+              }}
+            ></Column>
             <Column
               field="#"
               header="Action"
