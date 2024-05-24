@@ -115,12 +115,8 @@ export function NewRoom({ user1 }) {
               border={"1px solid black"}
             >
               <tr>
-                <th>BreakFast Only</th>
-                <th>Lunch Only</th>
-                <th>Dinner Only</th>
-                <th>Breakfast with Lunch</th>
-                <th>Lunch with Dinner</th>
-                <th>Dinner with BreakFast</th>
+                <th>Bed & Breakfast</th>
+                <th>HalfBoard</th>
                 <th>Full board</th>
                 <th>Adult Charge</th>
               </tr>
@@ -128,51 +124,20 @@ export function NewRoom({ user1 }) {
                 <td>
                   <input
                     type="number"
-                    name="breakfast_price"
-                    placeholder="breakfast price"
+                    name="Bedbreakfast"
+                    placeholder="bed & BReakfast"
                     onChange={updateData}
                   />
                 </td>
                 <td>
                   <input
                     type="number"
-                    name="lunch_price"
-                    placeholder="Lunch price"
+                    name="halfboard"
+                    placeholder="Half Board"
                     onChange={updateData}
                   />
                 </td>
-                <td>
-                  <input
-                    type="number"
-                    name="dinner_price"
-                    placeholder="Dinner price"
-                    onChange={updateData}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="breakfast_lunch"
-                    placeholder="Breakfast and Lunch "
-                    onChange={updateData}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="lunch_dinner"
-                    placeholder="Lunch with Dinner"
-                    onChange={updateData}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="dinner_breakfast"
-                    placeholder="Dinner with BreakFast"
-                    onChange={updateData}
-                  />
-                </td>
+
                 <td>
                   <input
                     type="number"

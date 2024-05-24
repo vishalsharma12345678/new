@@ -1,4 +1,5 @@
 import * as React from "react";
+import { InputText } from "primereact/inputtext";
 
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -169,6 +170,39 @@ export function LastFragment({ user }) {
       </>
     );
   };
+  const cellEditor = (options) => {
+    // if (options.field === "price") return priceEditor(options);
+    return textEditor(options);
+  };
+
+  const textEditor = (options) => {
+    return (
+      <InputText
+        type="text"
+        value={options.value}
+        onChange={(e) => options.editorCallback(e.target.value)}
+        onKeyDown={(e) => e.stopPropagation()}
+      />
+    );
+  };
+  const onCellEditComplete = (e) => {
+    let { rowData, newValue, field, originalEvent: event } = e;
+
+    if (newValue.trim().length > 0) rowData[field] = newValue;
+    else event.preventDefault();
+  };
+  const onRowEditComplete = (e) => {
+    let _products = [...rooms];
+    let { newData, index } = e;
+
+    _products[index] = newData;
+
+    setRooms(_products);
+  };
+
+  const allowEdit = (rowData) => {
+    return rowData.full_name !== "Blue Band";
+  };
   return (
     <div style={{ display: "flex" }}>
       <Sidebark user={user} />
@@ -196,13 +230,14 @@ export function LastFragment({ user }) {
         >
           Export
         </button>
-        <div className={"card"} style={{ height: 600, width: "100%" }}>
+        <div className={"card p-fluid"} style={{ height: 600, width: "100%" }}>
           <DataTable
             value={rooms}
             paginator
             rows={5}
             ref={dt}
-            // filterDisplay="row"
+            onRowEditComplete={onRowEditComplete}
+            editMode="row"
             rowsPerPageOptions={[5, 10, 25, 50]}
             tableStyle={{ minWidth: "50rem" }}
           >
@@ -217,6 +252,8 @@ export function LastFragment({ user }) {
               field="full_name"
               header="full_name"
               filter
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
               filterPlaceholder="Search"
               style={{ width: "6rem" }}
             ></Column>
@@ -224,6 +261,8 @@ export function LastFragment({ user }) {
               field="registrationNo"
               header="Reg No."
               filter
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
               filterPlaceholder="Search"
               style={{ width: "8rem" }}
             ></Column>
@@ -264,6 +303,11 @@ export function LastFragment({ user }) {
               header="Action"
               body={Action}
               style={{ width: "15%" }}
+            ></Column>
+            <Column
+              rowEditor={allowEdit}
+              headerStyle={{ width: "10%", minWidth: "8rem" }}
+              bodyStyle={{ textAlign: "center" }}
             ></Column>
           </DataTable>
         </div>

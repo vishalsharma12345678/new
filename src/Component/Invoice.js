@@ -5,10 +5,21 @@ import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import { Modal, Button, Table } from "antd";
 import "./invoice.css";
+import * as React from "react";
+import { InputText } from "primereact/inputtext";
 
+import { DatePicker } from "antd";
+import { NavLink } from "react-router-dom";
 import { Sidebark } from "./Sidebar";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { classNames } from "primereact/utils";
 
 export function Invoice({ user }) {
+  const dt = useRef(null);
+  const exportCSV = (selectionOnly) => {
+    dt.current.exportCSV({ selectionOnly });
+  };
   const componentRef = useRef();
   const [popupModal, setPopupModal] = useState(false);
   const [billdata, setbilldata] = useState([]);
@@ -31,7 +42,53 @@ export function Invoice({ user }) {
     getAllBills();
     //eslint-disable-next-line
   }, []);
+  const cellEditor = (options) => {
+    // if (options.field === "price") return priceEditor(options);
+    return textEditor(options);
+  };
 
+  const textEditor = (options) => {
+    return (
+      <InputText
+        type="text"
+        value={options.value}
+        onChange={(e) => options.editorCallback(e.target.value)}
+        onKeyDown={(e) => e.stopPropagation()}
+      />
+    );
+  };
+  const onCellEditComplete = (e) => {
+    let { rowData, newValue, field, originalEvent: event } = e;
+
+    if (newValue.trim().length > 0) rowData[field] = newValue;
+    else event.preventDefault();
+  };
+  const onRowEditComplete = (e) => {
+    let _products = [...billdata];
+    let { newData, index } = e;
+
+    _products[index] = newData;
+
+    setbilldata(_products);
+  };
+
+  const allowEdit = (rowData) => {
+    return rowData.full_name !== "Blue Band";
+  };
+  const Action = (product) => {
+    return (
+      <div>
+        <EyeOutlined
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setSelectedBill(product);
+            setSelectedguest(product.bookingid.moreperson);
+            setPopupModal(true);
+          }}
+        />
+      </div>
+    );
+  };
   return (
     <div style={{ display: "flex" }}>
       <Sidebark user={user} />
@@ -48,57 +105,98 @@ export function Invoice({ user }) {
           className="rooms book"
           style={{ position: "relative", width: "100%" }}
         >
-          <table width={"100%"}>
-            <tr>
-              <td>_id</td>
-              <td>Created Date</td>
-              <td>Customer</td>
-              <td>Total tax</td>
-              <td>totalAmount </td>
-              <td>Payment Method</td>
-              <td>Curremcy</td>
-              <td>Booking Status</td>
-              <td>created by</td>
-              <td>Actions</td>
-            </tr>
-            {billdata.map((bill) => {
-              return (
-                <tr>
-                  <td>{bill._id}</td>
-                  <td>{bill.updatedAt}</td>
-                  <td>{bill.bookingid.full_name}</td>
-                  <td>12%</td>
-                  <td>{bill.totalAmount}</td>
-                  <td>USD</td>
-                  <td>{bill.bookingid.payment_type}</td>
-                  <td>{bill.bookingid.status}</td>
-                  <td>{bill.bookingid.verifiedby}</td>
-                  <td>
-                    {
-                      <div>
-                        <EyeOutlined
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSelectedBill(bill);
-                            setSelectedguest(bill.bookingid.moreperson);
-                            setPopupModal(true);
-                          }}
-                        />
-                        <EyeOutlined
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSelectedBill(bill);
-                            setSelectedguest(bill.bookingid.moreperson);
-                            setPopupModal(true);
-                          }}
-                        />
-                      </div>
-                    }
-                  </td>
-                </tr>
-              );
-            })}
-          </table>
+          <button
+            type="button"
+            icon="pi pi-file"
+            rounded
+            onClick={() => exportCSV(false)}
+            data-pr-tooltip="CSV"
+          >
+            Export
+          </button>
+          <DataTable
+            value={billdata}
+            paginator
+            rows={5}
+            ref={dt}
+            onRowEditComplete={onRowEditComplete}
+            editMode="row"
+            rowsPerPageOptions={[5, 10, 25, 50]}
+            tableStyle={{ minWidth: "50rem" }}
+          >
+            <Column
+              field="_id"
+              header="_id"
+              filter
+              filterPlaceholder="Search"
+              style={{ width: "6rem" }}
+            ></Column>
+            <Column
+              field="updatedAt"
+              header="Created Date"
+              filter
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
+              filterPlaceholder="Search"
+              style={{ width: "6rem" }}
+            ></Column>
+            <Column
+              field="bookingid.full_name"
+              header="Customer"
+              filter
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
+              filterPlaceholder="Search"
+              style={{ width: "8rem" }}
+            ></Column>
+            <Column
+              field="check_in"
+              header="Total tax"
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
+              style={{ width: "10%" }}
+              body={"12%"}
+            ></Column>
+            <Column
+              field="totalAmount"
+              header="totalAmount"
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              field="check_in"
+              header="Currency"
+              style={{ width: "10%" }}
+              body={"usd"}
+            ></Column>
+            <Column
+              field="bookingid.payment_type"
+              header="Payment Method"
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              field="bookingid.status"
+              header="Booking Status"
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              field="bookingid.verifiedby"
+              header="created by"
+              style={{ width: "10%" }}
+            ></Column>
+            <Column
+              field="check_in"
+              header="Action"
+              style={{ width: "10%" }}
+              body={Action}
+            ></Column>
+            <Column
+              rowEditor={allowEdit}
+              headerStyle={{ width: "10%", minWidth: "8rem" }}
+              bodyStyle={{ textAlign: "center" }}
+            ></Column>
+          </DataTable>
           {popupModal && (
             <Modal
               width="100%"

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { InputText } from "primereact/inputtext";
 
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -174,6 +175,39 @@ export function UpcomingFragment({ user }) {
       </>
     );
   };
+  const cellEditor = (options) => {
+    // if (options.field === "price") return priceEditor(options);
+    return textEditor(options);
+  };
+
+  const textEditor = (options) => {
+    return (
+      <InputText
+        type="text"
+        value={options.value}
+        onChange={(e) => options.editorCallback(e.target.value)}
+        onKeyDown={(e) => e.stopPropagation()}
+      />
+    );
+  };
+  const onCellEditComplete = (e) => {
+    let { rowData, newValue, field, originalEvent: event } = e;
+
+    if (newValue.trim().length > 0) rowData[field] = newValue;
+    else event.preventDefault();
+  };
+  const onRowEditComplete = (e) => {
+    let _products = [...rooms];
+    let { newData, index } = e;
+
+    _products[index] = newData;
+
+    setRooms(_products);
+  };
+
+  const allowEdit = (rowData) => {
+    return rowData.full_name !== "Blue Band";
+  };
   return (
     <div style={{ display: "flex" }}>
       <Sidebark user={user} />
@@ -207,6 +241,8 @@ export function UpcomingFragment({ user }) {
             paginator
             rows={5}
             ref={dt}
+            onRowEditComplete={onRowEditComplete}
+            editMode="row"
             rowsPerPageOptions={[5, 10, 25, 50]}
             tableStyle={{ minWidth: "50rem" }}
           >
@@ -220,6 +256,8 @@ export function UpcomingFragment({ user }) {
             <Column
               field="full_name"
               header="full_name"
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
               filter
               filterPlaceholder="Search"
               style={{ width: "6rem" }}
@@ -227,6 +265,8 @@ export function UpcomingFragment({ user }) {
             <Column
               field="registrationNo"
               header="Reg No."
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
               filter
               filterPlaceholder="Search"
               style={{ width: "8rem" }}
@@ -268,6 +308,11 @@ export function UpcomingFragment({ user }) {
               header="Action"
               body={Action}
               style={{ width: "15%" }}
+            ></Column>
+            <Column
+              rowEditor={allowEdit}
+              headerStyle={{ width: "10%", minWidth: "8rem" }}
+              bodyStyle={{ textAlign: "center" }}
             ></Column>
           </DataTable>
         </div>
