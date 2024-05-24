@@ -17,7 +17,10 @@ export function Login() {
     // "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin",
     try {
       await axios
-        .post("http://localhost:4000/login/getlogin/", user)
+        .post(
+          "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin/",
+          user
+        )
         .then(async (response) => {
           console.log(await response.data.message);
           localStorage.setItem("user", JSON.stringify(await response.data));
