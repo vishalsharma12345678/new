@@ -33,24 +33,32 @@ export function OngoingFragemnt({ user }) {
 
     // setFetching(false);
   }
-  async function handleEdit1(e, id, payment_type) {
+  async function handleEdit1(e, value, id, payment_type) {
     // setFetching(true);
     const ids = {
       bookingid: id,
       value: e.target.value,
     };
     console.log(payment_type);
-    if (payment_type === "onhold") {
-      console.log("first");
+    if (value === "Checkedin") {
+      console.log("1");
       let roomsdata = await axios.post(
-        `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntryhold`,
+        `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingcheckin`,
         ids
       );
     } else {
-      let roomsdata = await axios.post(
-        `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntry`,
-        ids
-      );
+      if (payment_type === "onhold") {
+        console.log("first");
+        let roomsdata = await axios.post(
+          `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntryhold`,
+          ids
+        );
+      } else {
+        let roomsdata = await axios.post(
+          `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntry`,
+          ids
+        );
+      }
     }
     fetchData();
 
@@ -88,7 +96,9 @@ export function OngoingFragemnt({ user }) {
             ? true
             : false
         }
-        onChange={(e) => handleEdit1(e, product._id, product.payment_type)}
+        onChange={(e) =>
+          handleEdit1(e, e.target.value, product._id, product.payment_type)
+        }
       >
         <option
           value="Checkedin"
