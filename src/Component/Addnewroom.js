@@ -18,7 +18,7 @@ export function NewRoom({ user1 }) {
     });
     console.log(data);
     const result = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/room/addroom",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/room/addroom",
       data
     );
     console.log(result);
@@ -32,7 +32,7 @@ export function NewRoom({ user1 }) {
   };
   async function roomtypes() {
     const roomtype = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/Roomtype"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/Roomtype"
     );
     setRoomtype(roomtype.data);
   }

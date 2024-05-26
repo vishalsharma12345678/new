@@ -28,7 +28,7 @@ export function UpdateBooking({ user1 }) {
   }
   async function handlerCheckOut(e) {
     let rooms = await fetch(
-      "https://walrus-app-4kyov.ondigitalocean.app/room/getallroomsAvalible"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/room/getallroomsAvalible"
     );
     let data = await rooms.json();
     console.log(data);
@@ -113,7 +113,7 @@ export function UpdateBooking({ user1 }) {
     const fullData = { ...data };
     console.log(fullData);
     const curUser = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/updatebookingdetails",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/updatebookingdetails",
       fullData
     );
     // console.log(curUser);
@@ -122,7 +122,7 @@ export function UpdateBooking({ user1 }) {
   }
   async function fetchdata() {
     const booking = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/allbooking/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/allbooking/${id}`
     );
     let book = booking.data;
     const { moreperson, ...rest } = book;

@@ -27,7 +27,7 @@ export function UpcomingFragment({ user }) {
     };
     // console.log(ids)
     let roomsdata = await axios.post(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/updateBooking`,
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBooking`,
       ids
     );
     await fetchData();
@@ -43,7 +43,7 @@ export function UpcomingFragment({ user }) {
     };
     // console.log(ids)
     let roomsdata = await axios.post(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntry`,
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBookingEntry`,
       ids
     );
     fetchData();
@@ -53,7 +53,7 @@ export function UpcomingFragment({ user }) {
   async function DeleteRoom(id) {
     // setFetching(true);
     await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/deletebooking/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/deletebooking/${id}`
     );
     fetchData();
     // setFetching(false);
@@ -61,7 +61,7 @@ export function UpcomingFragment({ user }) {
   async function fetchData() {
     setFetching(true);
     let roomsdata = await fetch(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/allBookings"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/allBookings"
     );
     let data = await roomsdata.json();
     console.log(data);
@@ -74,7 +74,7 @@ export function UpcomingFragment({ user }) {
   async function filterByDate(dates) {
     if (dates) {
       let rooms = await axios.post(
-        "https://walrus-app-4kyov.ondigitalocean.app/book/allBookingswithdate",
+        "https://monkfish-app-wcb9o.ondigitalocean.app/book/allBookingswithdate",
         {
           check_in: dates[0],
           check_out: dates[1],

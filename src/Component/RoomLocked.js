@@ -9,7 +9,7 @@ export function RoomLocked({ user }) {
     console.log(id);
     // setFetching(true);
     let roomsdata = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/room/unlockRoom/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/room/unlockRoom/${id}`
     );
     fetchData();
     // setFetching(false);
@@ -17,7 +17,7 @@ export function RoomLocked({ user }) {
   async function fetchData() {
     setFetching(true);
     let roomsdata = await fetch(
-      "https://walrus-app-4kyov.ondigitalocean.app/room/lockRoom"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/room/lockRoom"
     );
     let data = await roomsdata.json();
     setRooms((s) => data);

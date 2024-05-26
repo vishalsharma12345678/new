@@ -26,7 +26,7 @@ export function OngoingFragemnt({ user }) {
     };
     // console.log(ids)
     let roomsdata = await axios.post(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/updateBooking`,
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBooking`,
       ids
     );
     fetchData();
@@ -43,19 +43,19 @@ export function OngoingFragemnt({ user }) {
     if (value === "Checkedin") {
       console.log("1");
       let roomsdata = await axios.post(
-        `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingcheckin`,
+        `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBookingcheckin`,
         ids
       );
     } else {
       if (payment_type === "onhold") {
         console.log("first");
         let roomsdata = await axios.post(
-          `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntryhold`,
+          `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBookingEntryhold`,
           ids
         );
       } else {
         let roomsdata = await axios.post(
-          `https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntry`,
+          `https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBookingEntry`,
           ids
         );
       }
@@ -67,7 +67,7 @@ export function OngoingFragemnt({ user }) {
   async function DeleteRoom(id) {
     // setFetching(true);
     await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/book/deletebooking/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/book/deletebooking/${id}`
     );
     fetchData();
     // setFetching(false);
@@ -76,7 +76,7 @@ export function OngoingFragemnt({ user }) {
   async function fetchData() {
     setFetching(true);
     let roomsdata = await fetch(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/allBookings"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/allBookings"
     );
     let data = await roomsdata.json();
     console.log(data);

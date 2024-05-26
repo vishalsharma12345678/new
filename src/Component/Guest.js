@@ -7,7 +7,7 @@ export function Guest({ user }) {
   useEffect(() => {
     async function fetch() {
       let guest = await axios.get(
-        `https://walrus-app-4kyov.ondigitalocean.app/guests`
+        `https://monkfish-app-wcb9o.ondigitalocean.app/guests`
       );
       setguest(guest.data);
     }

@@ -29,7 +29,7 @@ export function Invoice({ user }) {
 
   const getAllBills = async () => {
     const data = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/invoices"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/invoices"
     );
     console.log(data.data.result);
     setbilldata(data.data.result);

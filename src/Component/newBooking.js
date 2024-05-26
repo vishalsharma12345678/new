@@ -27,7 +27,7 @@ export function NewBooking({ user1 }) {
   async function handlerCheckOut(e, value1) {
     // console.log(value);
     let rooms = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/room/getallroomsAvalible",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/room/getallroomsAvalible",
       { value: value1 }
     );
     // console.log(rooms);
@@ -121,7 +121,7 @@ export function NewBooking({ user1 }) {
     e.preventDefault();
     const fullData = { ...data, guest: guests };
     const curUser = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/addbooking",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/addbooking",
       fullData
     );
     window.location.href = "/";
@@ -129,10 +129,10 @@ export function NewBooking({ user1 }) {
 
   async function roomtypes() {
     const roomtype = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/Roomtype"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/Roomtype"
     );
     const regno = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/allBookingslength"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/allBookingslength"
     );
 
     setreg((s) => regno.data.booking);

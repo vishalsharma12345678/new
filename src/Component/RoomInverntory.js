@@ -11,7 +11,7 @@ export function RoomInvertory({ user }) {
   async function lockroom(id) {
     // setFetching(true);
     let roomsdata = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/room/lockRoom/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/room/lockRoom/${id}`
     );
     fetchData();
 
@@ -21,7 +21,7 @@ export function RoomInvertory({ user }) {
     // setFetching(true);
     // console.log(id)
     await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/room/delete/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/room/delete/${id}`
     );
     fetchData();
     // setFetching(false);
@@ -29,7 +29,7 @@ export function RoomInvertory({ user }) {
   async function fetchData() {
     setFetching(true);
     let roomsdata = await fetch(
-      "https://walrus-app-4kyov.ondigitalocean.app/room/getallrooms"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/room/getallrooms"
     );
     let data = await roomsdata.json();
     setRooms((s) => data);

@@ -16,26 +16,26 @@ export function User({ user }) {
       value: e.target.value,
     };
     await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/user/update",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/user/update",
       ids
     );
     console.log(ids);
   }
   async function fetch1() {
     let data = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/user/"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/user/"
     );
     setUsers(data.data);
   }
   async function Delete(id) {
     await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/user/deleteUser/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/user/deleteUser/${id}`
     );
     fetch1();
   }
   async function updateUser() {
     let data = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/updatedetails"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/updatedetails"
     );
     setUsers(data.data);
   }
@@ -166,7 +166,10 @@ export function AddUser({ fetch1, open }) {
       Users: Users,
     };
     await axios
-      .post("https://walrus-app-4kyov.ondigitalocean.app/user/createUser", data)
+      .post(
+        "https://monkfish-app-wcb9o.ondigitalocean.app/user/createUser",
+        data
+      )
       .then((result) => {
         open(false);
         fetch1();
@@ -390,7 +393,7 @@ export function UpdateUser({ fetch1, open, user }) {
     };
     await axios
       .post(
-        "https://walrus-app-4kyov.ondigitalocean.app/user/updatedetails",
+        "https://monkfish-app-wcb9o.ondigitalocean.app/user/updatedetails",
         data
       )
       .then((result) => {

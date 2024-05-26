@@ -15,11 +15,11 @@ export function Home({ user }) {
   async function fetchdata() {
     console.log("first");
     let taxdata = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/Company/details/find`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/Company/details/find`
     );
 
     let data = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/room/roomsDetails`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/room/roomsDetails`
     );
     // console.log(taxdata);
     setdetails(taxdata.data);
@@ -95,7 +95,7 @@ export function Tax({ Tgst, Tax }) {
   const [tax, setTax] = useState(Tax);
   function handleClick() {
     const last = axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/Company/details/find",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/Company/details/find",
       {
         Tgst_Tax: tgst,
         Tax: tax,

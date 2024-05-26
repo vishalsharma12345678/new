@@ -14,11 +14,11 @@ export function Login() {
       username: username,
       password: password,
     };
-    // "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin",
+    // "https://monkfish-app-wcb9o.ondigitalocean.app/login/getlogin",
     try {
       await axios
         .post(
-          "https://walrus-app-4kyov.ondigitalocean.app/login/getlogin/",
+          "https://monkfish-app-wcb9o.ondigitalocean.app/login/getlogin/",
           user
         )
         .then(async (response) => {

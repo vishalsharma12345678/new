@@ -8,7 +8,7 @@ import { DatePicker, Space } from "antd";
 export function OnHold({ user }) {
   async function handlePaymenttype(id) {
     const curUser = await axios.post(
-      "https://walrus-app-4kyov.ondigitalocean.app/book/updateBookingEntryCredit",
+      "https://monkfish-app-wcb9o.ondigitalocean.app/book/updateBookingEntryCredit",
       { id }
     );
     fetch();
@@ -17,7 +17,7 @@ export function OnHold({ user }) {
 
   async function fetch() {
     let billdataresult = await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/holdbills/`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/holdbills/`
     );
     console.log(billdata);
     setbilldata(billdataresult.data);

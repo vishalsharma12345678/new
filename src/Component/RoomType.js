@@ -7,14 +7,14 @@ export function RoomType({ user }) {
   const [open, setopen] = useState(false);
   async function fetch1() {
     const res = await axios.get(
-      "https://walrus-app-4kyov.ondigitalocean.app/Roomtype"
+      "https://monkfish-app-wcb9o.ondigitalocean.app/Roomtype"
     );
     setRoomType(res.data);
   }
   async function Delete(id) {
     console.log(id);
     await axios.get(
-      `https://walrus-app-4kyov.ondigitalocean.app/deleteRoomtype/${id}`
+      `https://monkfish-app-wcb9o.ondigitalocean.app/deleteRoomtype/${id}`
     );
     fetch1();
   }
@@ -97,7 +97,7 @@ export function RoomTypeg({ open, fetch1 }) {
     e.preventDefault();
 
     await axios
-      .post("https://walrus-app-4kyov.ondigitalocean.app/addRoomtype", {
+      .post("https://monkfish-app-wcb9o.ondigitalocean.app/addRoomtype", {
         data: data,
       })
       .then((result) => {
