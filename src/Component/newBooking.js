@@ -284,15 +284,15 @@ export function NewBooking({ user1 }) {
                     onChange={updateData}
                     placeholder="no of child"
                   />
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="adultCharges"
                     onChange={updateData}
                     id=""
-                  />
+                  /> */}
                 </div>
               </p>
-              <p>
+              {/* <p>
                 <label for="">Room Number</label>
                 <br />
                 <select
@@ -307,7 +307,7 @@ export function NewBooking({ user1 }) {
                     return <option value={room._id}>{room.roomNo}</option>;
                   })}
                 </select>
-              </p>
+              </p> */}
               <p>
                 <label for="">Meal Plan</label>
                 <br />
