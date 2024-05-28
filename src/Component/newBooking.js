@@ -292,22 +292,20 @@ export function NewBooking({ user1 }) {
                   /> */}
                 </div>
               </p>
-              {/* <p>
+              <p>
                 <label for="">Room Number</label>
                 <br />
                 <select
                   name="room_number"
                   required
-                  onChange={(e) => (
-                    updateData(e), handlerChange(e.target.value)
-                  )}
+                  onChange={(e) => handlerChange(e.target.value)}
                 >
                   <option value="">choose...</option>
                   {rooms.map((room) => {
                     return <option value={room._id}>{room.roomNo}</option>;
                   })}
                 </select>
-              </p> */}
+              </p>
               <p>
                 <label for="">Meal Plan</label>
                 <br />
