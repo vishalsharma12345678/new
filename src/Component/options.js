@@ -1,7 +1,9 @@
 export function Opions() {
   return (
     <>
-      <option value="">-- select one --</option>
+      <option value="" selected disabled>
+        -- select one --
+      </option>
       <option value="afghan">Afghan</option>
       <option value="albanian">Albanian</option>
       <option value="algerian">Algerian</option>

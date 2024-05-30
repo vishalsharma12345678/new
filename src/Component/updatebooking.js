@@ -60,12 +60,15 @@ export function UpdateBooking({ user1 }) {
         if (!availability) break;
       }
       //   console.log(availability);
-      if (availability || item.currentbookings.length == 0) {
+      if (availability || item.currentbookings.length === 0) {
         g.push(item);
       }
     });
     setRooms(g);
   }
+  const [checkindate, setcheckindate] = useState(new Date());
+  const [checkcheckoutdate, setcheckoutdate] = useState(new Date());
+
   function handleraddGuest(e) {
     e.preventDefault();
     setGuests((items) => [...items, {}]);
@@ -127,6 +130,8 @@ export function UpdateBooking({ user1 }) {
     let book = booking.data;
     const { moreperson, ...rest } = book;
     setData(rest);
+    setcheckindate(new Date(rest.check_in).toISOString().split("T")[0]);
+    setcheckoutdate(new Date(rest.check_out).toISOString().split("T")[0]);
     setGuests(moreperson);
     setRoom([rest.room_number]);
   }
@@ -201,7 +206,7 @@ export function UpdateBooking({ user1 }) {
                 <input
                   type="date"
                   name="check_in"
-                  value={data.check_in}
+                  value={checkindate}
                   required
                   onChange={(e) => {
                     handlerCheckIn(e);
@@ -215,7 +220,7 @@ export function UpdateBooking({ user1 }) {
                 <input
                   type="date"
                   name="check_out"
-                  value={data.check_out}
+                  value={checkcheckoutdate}
                   required
                   onChange={(e) => {
                     setcheck_out(e.target.value);
@@ -513,7 +518,7 @@ export function UpdateBooking({ user1 }) {
                 <input
                   type="text"
                   name="wp_nd"
-                  disabled={data.wp_nd !== undefined ? false : true}
+                  disabled={wpps}
                   value={data.wp_nd}
                   onChange={updateData}
                 />
@@ -522,7 +527,8 @@ export function UpdateBooking({ user1 }) {
                 <label htmlFor="">Passport</label>
                 <input
                   type="text"
-                  disabled={data.passport_number !== undefined ? false : true}
+                  disabled={!wpps}
+                  // disabled={data.passport_number !== undefined ? false : true}
                   value={data.passport_number}
                   name="passport_number"
                   onChange={updateData}

@@ -244,7 +244,7 @@ export function NewBooking({ user1 }) {
                     updateData(e);
                   }}
                 >
-                  <option value="" selected>
+                  <option value="" selected disabled>
                     choose...
                   </option>
                   {Array.from(roomtype).map((room) => {

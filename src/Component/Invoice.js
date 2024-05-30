@@ -64,9 +64,10 @@ export function Invoice({ user }) {
     else event.preventDefault();
   };
   const onRowEditComplete = (e) => {
+    console.log(...billdata);
     let _products = [...billdata];
     let { newData, index } = e;
-
+    console.log(newData, index);
     _products[index] = newData;
 
     setbilldata(_products);
@@ -155,12 +156,14 @@ export function Invoice({ user }) {
               style={{ width: "8rem" }}
             ></Column>
             <Column
-              field="check_in"
+              field="op"
               header="Total tax"
               editor={(options) => cellEditor(options)}
               onCellEditComplete={onCellEditComplete}
               style={{ width: "10%" }}
-              body={"12%"}
+              body={(product) => {
+                return <div>12%</div>;
+              }}
             ></Column>
             <Column
               field="totalAmount"
@@ -452,7 +455,11 @@ export function Invoice({ user }) {
                               days(
                                 new Date(selectedBill.bookingid.check_in),
                                 new Date(selectedBill.bookingid.check_out)
-                              )}
+                              ) *
+                              (selectedBill.adultNo / 4) ===
+                            0
+                              ? 1
+                              : selectedBill.adultNo / 4}
                             .00
                           </td>
                           <td>
@@ -605,9 +612,4 @@ function days(i, j) {
   let Difference_In_Time = i.getTime() - j.getTime();
   let Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
   return Math.abs(Difference_In_Days) + 1;
-}
-
-export function ata({ get }) {
-  console.log(get);
-  return <div>bj,b,</div>;
 }

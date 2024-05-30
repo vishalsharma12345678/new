@@ -65,6 +65,9 @@ export default function App() {
             {open ? (
               <ul className="menu1">
                 <li className="menu1-item">
+                  <button>{user.name}</button>
+                </li>
+                <li className="menu1-item">
                   <button>Change Password</button>
                 </li>
                 <li className="menu1-item">
