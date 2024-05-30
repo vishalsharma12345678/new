@@ -177,7 +177,7 @@ export function UpdateBooking({ user1 }) {
                 <label htmlFor="">Invoice No.</label>
                 <br />
                 <input
-                  type="number"
+                  type="text"
                   value={data.invoice_No}
                   required
                   name="invoice_No"
@@ -588,7 +588,11 @@ export function UpdateBooking({ user1 }) {
               </p>
               <p>
                 <label htmlFor="">Upload Id</label>
-                <input type="file" name="" style="border: 1px solid black" />
+                <input
+                  type="file"
+                  name=""
+                  style={{ border: "1px solid black" }}
+                />
               </p>
               <p>
                 <button onClick={(e) => handleraddGuest(e)}>
