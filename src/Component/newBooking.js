@@ -256,7 +256,7 @@ export function NewBooking({ user1 }) {
                 <label for="">No of Pax</label>
                 <div style={{ display: "flex", width: "100%" }}>
                   <input
-                    type="text"
+                    type="number"
                     required
                     style={{ width: "45%" }}
                     name="adultNo"
@@ -277,7 +277,7 @@ export function NewBooking({ user1 }) {
                     placeholder="no of adult"
                   />
                   <input
-                    type="text"
+                    type="number"
                     style={{ width: "45%" }}
                     name="children"
                     required
@@ -300,7 +300,9 @@ export function NewBooking({ user1 }) {
                   required
                   onChange={(e) => handlerChange(e.target.value)}
                 >
-                  <option value="">choose...</option>
+                  <option selected disabled value="">
+                    choose...
+                  </option>
                   {rooms.map((room) => {
                     return <option value={room._id}>{room.roomNo}</option>;
                   })}
